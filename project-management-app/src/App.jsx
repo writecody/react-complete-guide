@@ -18,33 +18,43 @@ function App() {
     });
   }
 
+  function handleCancelAddProject() {
+    setprojectsState(prevProjectsState => {
+      return {
+        ...prevProjectsState,
+        selectedProjectId: undefined,
+      }
+    });
+  }
+
   function handleAddProject(projectData) {
     setprojectsState(prevState => {
+      const projectId = Date.now()
       const newProject = {
         ...projectData,
-        id: Date.now()
+        id: projectId
       }
 
       return {
         ...prevState,
+        selectedProjectId: undefined,
         projects: [...prevState.projects, newProject]
       }
     })
   }
 
-  console.log(projectsState)
-
   let content;
 
   if (projectsState.selectedProjectId === null) {
-    content = <NewProject onAdd={handleAddProject}/>
+    content = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />
   } else if (projectsState.selectedProjectId === undefined) {
-    content = <NoProjectSelected onStartAddProject={handleStartAddProject}/>
+    content = <NoProjectSelected onStartAddProject={handleStartAddProject} />
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
       <Sidebar
+        projects={projectsState.projects}
         title={"Your Projects"}
         onStartAddProject={handleStartAddProject}
       />
