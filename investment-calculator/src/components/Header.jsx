@@ -4,7 +4,7 @@ export default function Header({ title }) {
     return (
         <div id="header">
             <img src={siteLogo} alt="Illustration of bag with dollar sign, surrounded by coins" />
-            <h1>React Investment Calculator</h1>
+            <h1>{title}</h1>
         </div>
     );
 }
