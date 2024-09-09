@@ -8,7 +8,7 @@ export default function QuestionTimer({ timeout, onTimeout }) {
     // can also be written as: setTimeout(onTimeout, timeout)
     const timer = setTimeout(() => {
       onTimeout();
-    }, timeout);
+    }, [timeout]);
 
     return () => {
       clearTimeout(timer);
